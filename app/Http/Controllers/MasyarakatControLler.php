@@ -27,9 +27,11 @@ class MasyarakatController extends Controller
         $penghasilan = Kriteria::with('subKriteria')->where('kode_kri', '4')->first();
         $dissabilitas = Kriteria::with('subKriteria')->where('kode_kri', '5')->first();
         $umur = Kriteria::with('subKriteria')->where('kode_kri', '6')->first();
+        //
 
         return view('masyarakat.index', [
-            'data' => $data, 'judul' => $judul,
+            'data' => $data,
+            'judul' => $judul,
             'hamil' => $hamil,
             'pendidikan' => $pendidikan,
             'tanggungan' => $tanggungan,
