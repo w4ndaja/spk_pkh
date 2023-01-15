@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/masyarakat/{masyarakat}/edit', 'App\Http\Controllers\MasyarakatController@edit');
     Route::put('/masyarakat/{masyarakat}', 'App\Http\Controllers\MasyarakatController@update');
     Route::delete('/masyarakat/{masyarakat}', 'App\Http\Controllers\MasyarakatController@destroy');
+    Route::post('list-masyarakat/upload', 'App\Http\Controllers\MasyarakatController@upload')->name('masyarakat.upload');
 
     //Kriteria
     Route::get('/kriteria', 'App\Http\Controllers\KriteriaController@index')->name('kriteria.index');

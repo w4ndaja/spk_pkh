@@ -57,22 +57,15 @@
 					<thead>
 						<tr>
 							<th rowspan="2">NO</th>
-							<th rowspan="2">NAMA KRI</th>
-							<th colspan="2">RENTANG NILAI</th>
+<th rowspan="2">NAMA KRI</th>
 							<th rowspan="2">#</th>
-						</tr>
-						<tr>
-							<th>DARI</th>
-							<th>SAMPAI</th>
-						</tr>
+</tr>
 					</thead>
 					<tbody>
 						@foreach($data as $key => $item)
 						<tr>
 							<td>{{$key+1}}</td>
-							<td>{{$item->kriteria}}</td>
-							<td>{{$item->dari}}</td>
-							<td>{{$item->sampai}}</td>
+<td>{{$item->kriteria}}</td>
 							<td>
 								<div style="display:flex;gap:6px">
 									<a href="#" data-id="{{ $item->id_sub}}" data-toggle="modal" data-target="#editModal{{$item->id_sub}}" class="btn btn-sm btn-warning btn-edit" title="Edit">

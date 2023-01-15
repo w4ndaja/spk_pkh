@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MasyarakatImport;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 use App\Models\Masyarakat;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MasyarakatController extends Controller
 {
@@ -108,5 +110,11 @@ class MasyarakatController extends Controller
         DB::table('tb_datamasyarakat')->where('id_ms', '=', $id)->delete();
 
         return redirect('masyarakat')->with('pesan', "Data Berhasil Dihapus");
+    }
+
+    public function upload(Request $req)
+    {
+        Excel::import(new MasyarakatImport, $req->file('excel'), null, \Maatwebsite\Excel\Excel::XLSX);
+        return back()->with('input', 'Data berhasil di impor!');
     }
 }

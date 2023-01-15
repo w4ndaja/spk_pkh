@@ -3,7 +3,7 @@
 @section('li')
 <ul class="nav menu">
 	<li><a href="/"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-<li class="active"><a href="{{url('/list-masyarakat')}}"><em class="fa fa-calendar">&nbsp;</em> Data Masyarakat</a></li>
+	<li class="active"><a href="{{url('/list-masyarakat')}}"><em class="fa fa-calendar">&nbsp;</em> Data Masyarakat</a></li>
 	<li><a href="{{url('/kriteria')}}"><em class="fa fa-calendar">&nbsp;</em> Data Kriteria</a></li>
 	{{--<li><a href="{{route('pkh-record.index')}}"><em class="fa fa-toggle-off">&nbsp;</em> Data PKH</a></li>--}}
 	<li><a href="{{route('pembobotan.index')}}"><em class="fa fa-toggle-off">&nbsp;</em> Pembobotan</a></li>
@@ -41,6 +41,11 @@
 				Tambah Data
 			</i>
 		</a>
+		<button class="btn btn-info" data-toggle="modal" href='#upload-modal'>
+			<i class="fa fa-upload">
+				Upload Data
+			</i>
+		</button>
 		<a href="{{url('/masyarakat/download')}}" target="_blank" class="btn btn-warning">
 			<i class="fa fa-download">
 				Download Data
@@ -56,42 +61,53 @@
 			@endif
 		</div>
 		<div class="col-md-12">
-
-			<table id="example1" class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>NO</th>
-						<th>NIK</th>
-						<th>NAMA</th>
-						<th>ALAMAT</th>
-						@foreach ($kriteria as $kriteriaItem)
-						<th>{{$kriteriaItem->nama_kri}}</th>
+			<div class="table-responsive">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-nowrap">NO</th>
+							<th class="text-nowrap">NIK</th>
+							<th class="text-nowrap">NAMA</th>
+							<th class="text-nowrap">ALAMAT</th>
+							<th class="text-nowrap">HAMIL</th>
+							<th class="text-nowrap">PENDIDIKAN</th>
+							<th class="text-nowrap">TANGGUNGAN</th>
+							<th class="text-nowrap">PENGHASILAN</th>
+							<th class="text-nowrap">DISSABILITAS</th>
+							<th class="text-nowrap">UMUR</th>
+							<th class="text-nowrap">#</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($data as $key)
+						<tr>
+							<td class="text-nowrap"> {{ $loop->iteration }} </td>
+							<td class="text-nowrap"> {{$key->nik}} </td>
+							<td class="text-nowrap"> {{$key->nama}} </td>
+							<td class="text-nowrap"> {{$key->alamat}}</td>
+							<td class="text-nowrap"> {{$key->hamil}}</td>
+							<td class="text-nowrap"> {{$key->pendidikan}}</td>
+							<td class="text-nowrap"> {{$key->tanggungan}}</td>
+							<td class="text-nowrap"> {{$key->penghasilan}}</td>
+							<td class="text-nowrap"> {{$key->dissabilitas}}</td>
+							<td class="text-nowrap"> {{$key->umur}}</td>
+							<td class="text-nowrap">
+								<center>
+									<form method="post" action="/masyarakat/{{$key->id_ms}}">
+										@method('delete')
+										@csrf
+										<a href="#" data-id="{{ $key->id_ms}}" data-toggle="modal" data-target="#modalEdit" class="btn btn-sm btn-warning btn-edit" title="Edit">
+											Ubah
+										</a>
+										<button class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data?')"> Hapus</button>
+									</form>
+								</center>
+							</td>
+						</tr>
 						@endforeach
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($data as $key)
-					<tr>
-						<td> {{ $loop->iteration }} </td>
-						<td> {{$key->nik}} </td>
-						<td> {{$key->nama}} </td>
-						<td> {{$key->alamat}}</td>
-						<td>
-							<center>
-								<form method="post" action="/masyarakat/{{$key->id_ms}}">
-									@method('delete')
-									@csrf
-									<a href="#" data-id="{{ $key->id_ms}}" data-toggle="modal" data-target="#modalEdit" class="btn btn-sm btn-warning btn-edit" title="Edit">
-										Ubah
-									</a>
-									<button class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data?')"> Hapus</button>
-								</form>
-							</center>
-						</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 
 
 
@@ -164,6 +180,27 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="upload-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Upload file excel</h4>
+			</div>
+			<form action="{{route('masyarakat.upload')}}" method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					@csrf
+					<input type="file" name="excel" class="form-control" accept=".xlsx">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Upload</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 @endsection
 
 @section('js')
