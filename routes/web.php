@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/masyarakat/{masyarakat}', 'App\Http\Controllers\MasyarakatController@destroy');
 
     //Kriteria
-    Route::get('/kriteria', 'App\Http\Controllers\KriterimaController@index')->name('kriteria.index');
+    Route::get('/kriteria', 'App\Http\Controllers\KriteriaController@index')->name('kriteria.index');
     Route::get('/kriteria/{kriteria}/pembobotan', 'App\Http\Controllers\KriteriaController@pembobotan')->name('kriteria.pembobotan');
     Route::post('/kriteria/{kriteria}/pembobotan', 'App\Http\Controllers\KriteriaController@storePembobotan')->name('kriteria.storePembobotan');
     Route::post('/kriteria/{kriteria}/pembobotan-lmu', 'App\Http\Controllers\KriteriaController@storePembobotanLmu')->name('kriteria.storePembobotanLmu');
