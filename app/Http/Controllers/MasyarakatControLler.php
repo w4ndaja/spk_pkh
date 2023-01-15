@@ -20,7 +20,6 @@ class MasyarakatController extends Controller
         $judul = "Data Masyarakat";
         $data = Masyarakat::all();
         $kriteria = Kriteria::with('subKriteria')->get();
-        dd($kriteria);
         return view('masyarakat.index', ['data' => $data, 'judul' => $judul, 'kriteria' => $kriteria]);
     }
 
