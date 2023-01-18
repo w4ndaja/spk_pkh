@@ -11,6 +11,7 @@ class HasilAkhirController extends Controller
 {
     public function index(Request $request)
     {
+        abort(500);
         /** Semua Kriteria */
         $kriteria = Kriteria::all();
 

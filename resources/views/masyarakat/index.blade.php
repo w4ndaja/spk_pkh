@@ -133,17 +133,72 @@
 				<div class="modal-body">
 					<div class="modal-body">
 						<div class="form-group">
-							<label>NIK </label>
-							<input class="form-control" name="nik" placeholder="nik">
+							<label>Nik</label>
+							<input class="form-control" name="nik" placeholder="Nik">
 						</div>
 						<div class="form-group">
-							<label>Nama </label>
-							<input class="form-control" name="nama" placeholder="nama">
+							<label>Nama</label>
+							<input class="form-control" name="nama" placeholder="Nama">
 						</div>
 						<div class="form-group">
 							<label>Alamat</label>
-							<input class="form-control" name="alamat" placeholder="Masukkan Alamat">
+							<input class="form-control" name="alamat" placeholder="Alamat">
 						</div>
+						<div class="form-group">
+							<label>Hamil</label>
+							<select name="hamil" id="input_hamil" class="form-control">
+								<option value="" selected disabled>Pilih Sub Kriteria</option>
+								@foreach ($hamil->subKriteria as $item)
+									<option value="{{$item->kriteria}}">{{$item->kriteria}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Pendidikan</label>
+							<select name="pendidikan" id="input_pendidikan" class="form-control">
+								<option value="" selected disabled>Pilih Sub Kriteria</option>
+								@foreach ($pendidikan->subKriteria as $item)
+									<option value="{{$item->kriteria}}">{{$item->kriteria}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Tanggungan</label>
+							<select name="tanggungan" id="input_tanggungan" class="form-control">
+								<option value="" selected disabled>Pilih Sub Kriteria</option>
+								@foreach ($tanggungan->subKriteria as $item)
+									<option value="{{$item->kriteria}}">{{$item->kriteria}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Penghasilan</label>
+							<select name="penghasilan" id="input_penghasilan" class="form-control">
+								<option value="" selected disabled>Pilih Sub Kriteria</option>
+								@foreach ($penghasilan->subKriteria as $item)
+									<option value="{{$item->kriteria}}">{{$item->kriteria}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Dissabilitas</label>
+							<select name="dissabilitas" id="input_dissabilitas" class="form-control">
+								<option value="" selected disabled>Pilih Sub Kriteria</option>
+								@foreach ($dissabilitas->subKriteria as $item)
+									<option value="{{$item->kriteria}}">{{$item->kriteria}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Umur</label>
+							<select name="umur" id="input_umur" class="form-control">
+								<option value="" selected disabled>Pilih Sub Kriteria</option>
+								@foreach ($umur->subKriteria as $item)
+									<option value="{{$item->kriteria}}">{{$item->kriteria}}</option>
+								@endforeach
+							</select>
+						</div>
+
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Tambah</button>

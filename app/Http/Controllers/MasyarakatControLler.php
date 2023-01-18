@@ -21,9 +21,22 @@ class MasyarakatController extends Controller
     {
         $judul = "Data Masyarakat";
         $data = Masyarakat::all();
-        $kriteria = Kriteria::with('subKriteria')->get();
-        //
-        return view('masyarakat.index', ['data' => $data, 'judul' => $judul, 'kriteria' => $kriteria]);
+        $hamil = Kriteria::with('subKriteria')->where('kode_kri', '1')->first();
+        $pendidikan = Kriteria::with('subKriteria')->where('kode_kri', '2')->first();
+        $tanggungan = Kriteria::with('subKriteria')->where('kode_kri', '3')->first();
+        $penghasilan = Kriteria::with('subKriteria')->where('kode_kri', '4')->first();
+        $dissabilitas = Kriteria::with('subKriteria')->where('kode_kri', '5')->first();
+        $umur = Kriteria::with('subKriteria')->where('kode_kri', '6')->first();
+
+        return view('masyarakat.index', [
+            'data' => $data, 'judul' => $judul,
+            'hamil' => $hamil,
+            'pendidikan' => $pendidikan,
+            'tanggungan' => $tanggungan,
+            'penghasilan' => $penghasilan,
+            'dissabilitas' => $dissabilitas,
+            'umur' => $umur,
+        ]);
     }
 
     public function download()
@@ -53,7 +66,7 @@ class MasyarakatController extends Controller
     {
         Masyarakat::create($request->all());
 
-        return redirect('masyarakat')->with('input', 'data berhasil ditambah');
+        return redirect('list-masyarakat')->with('input', 'data berhasil ditambah');
     }
 
 
@@ -96,7 +109,7 @@ class MasyarakatController extends Controller
                 'nama' => $request->nama,
                 'alamat' => $request->alamat
             ]);
-        return redirect('Masyarakat')->with('pesan', "Data Berhasil Diubah");
+        return redirect('list-masyarakat')->with('pesan', "Data Berhasil Diubah");
     }
 
     /**
